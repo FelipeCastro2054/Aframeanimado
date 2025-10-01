@@ -1,0 +1,174 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Cinta transportadora - A-Frame (detallado)</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aframe/1.7.0/aframe.min.js"></script>
+    <style>body{margin:0;font-family:sans-serif} .hint{position:absolute;left:10px;top:10px;background:rgba(0,0,0,0.45);color:#fff;padding:8px 10px;border-radius:6px;z-index:10;font-size:14px}</style>
+  </head>
+  <body>
+    <div class="hint">WASD mover / ratón mirar. R reinicia cámara. Click en la escena y usa las flechas para cámara libre.</div>
+
+    <a-scene background="color: #bfc6c9" shadow="type: pcfsoft">
+
+      <!-- Luces -->
+      <a-entity light="type: hemisphere; color:#ffffff; groundColor:#888; intensity:0.6"></a-entity>
+      <a-entity light="type: directional; intensity:0.9" position="-2 4 2" rotation="-50 -30 0" cast-shadow="true"></a-entity>
+
+      <!-- Cámara rig para mover por la escena -->
+      <a-entity id="cameraRig" position="0 1.6 4">
+        <a-camera id="camera" wasd-controls="acceleration:30" look-controls="pointerLockEnabled:true"></a-camera>
+      </a-entity>
+
+      <!-- Suelo -->
+      <a-plane rotation="-90 0 0" width="30" height="30" color="#dcdcdc" shadow="receive: true" position="0 0 0"></a-plane>
+
+      <!-- Estructura de la cinta (soporte) -->
+      <a-entity position="0 0 -3">
+        <!-- base soporte -->
+        <a-box width="4.6" depth="1.4" height="0.12" color="#111" position="0 0.46 0" shadow="receive: true"></a-box>
+
+        <!-- Laterales altos (carriles) -->
+        <a-box width="4.6" depth="0.18" height="0.18" color="#222" position="0 0.55 -0.58" shadow="receive: true"></a-box>
+        <a-box width="4.6" depth="0.18" height="0.18" color="#222" position="0 0.55 0.58" shadow="receive: true"></a-box>
+
+        <!-- Banda (plataforma sobre la que se mueven los slats) -->
+        <a-box id="beltBase" width="4" depth="0.8" height="0.02" color="#0d0d0d" position="0 0.6 0" shadow="receive: true"></a-box>
+
+        <!-- Rodillos front y back -->
+        <a-cylinder radius="0.15" height="0.9" rotation="0 0 90" position="2.05 0.6 0" color="#555" shadow="cast: true">
+          <a-animation attribute="rotation" dur="1200" to="0 0 360" repeat="indefinite" easing="linear"></a-animation>
+        </a-cylinder>
+        <a-cylinder radius="0.15" height="0.9" rotation="0 0 90" position="-2.05 0.6 0" color="#555" shadow="cast: true">
+          <a-animation attribute="rotation" dur="1200" to="0 0 360" repeat="indefinite" easing="linear"></a-animation>
+        </a-cylinder>
+
+        <!-- Slats: listones que van moviéndose para dar la sensación de banda -->
+        <!-- Creamos 16 slats con delays para simular movimiento continuo -->
+        <!-- Cada slat es un rectángulo fino que se desplaza en X de 2.2 a -2.2 -->
+        <a-entity id="slats">
+          <!-- Generadas manualmente para compatibilidad: ajustar n o dur para velocidad -->
+          <a-box width="0.28" height="0.01" depth="0.78" color="#0b0b0b" position="-2.2 0.61 0" shadow="cast: false"
+                 animation="property: position; from: 2.2 0.61 0; to: -2.2 0.61 0; dur: 1600; loop: true; easing: linear; delay: 0"></a-box>
+          <a-box width="0.28" height="0.01" depth="0.78" color="#0f0f0f" position="-1.93 0.61 0" shadow="cast: false"
+                 animation="property: position; from: 2.2 0.61 0; to: -2.2 0.61 0; dur: 1600; loop: true; easing: linear; delay: 100"></a-box>
+          <a-box width="0.28" height="0.01" depth="0.78" color="#0b0b0b" position="-1.66 0.61 0" shadow="cast: false"
+                 animation="property: position; from: 2.2 0.61 0; to: -2.2 0.61 0; dur: 1600; loop: true; easing: linear; delay: 200"></a-box>
+          <a-box width="0.28" height="0.01" depth="0.78" color="#0f0f0f" position="-1.39 0.61 0" shadow="cast: false"
+                 animation="property: position; from: 2.2 0.61 0; to: -2.2 0.61 0; dur: 1600; loop: true; easing: linear; delay: 300"></a-box>
+          <a-box width="0.28" height="0.01" depth="0.78" color="#0b0b0b" position="-1.12 0.61 0" shadow="cast: false"
+                 animation="property: position; from: 2.2 0.61 0; to: -2.2 0.61 0; dur: 1600; loop: true; easing: linear; delay: 400"></a-box>
+          <a-box width="0.28" height="0.01" depth="0.78" color="#0f0f0f" position="-0.85 0.61 0" shadow="cast: false"
+                 animation="property: position; from: 2.2 0.61 0; to: -2.2 0.61 0; dur: 1600; loop: true; easing: linear; delay: 500"></a-box>
+          <a-box width="0.28" height="0.01" depth="0.78" color="#0b0b0b" position="-0.58 0.61 0" shadow="cast: false"
+                 animation="property: position; from: 2.2 0.61 0; to: -2.2 0.61 0; dur: 1600; loop: true; easing: linear; delay: 600"></a-box>
+          <a-box width="0.28" height="0.01" depth="0.78" color="#0f0f0f" position="-0.31 0.61 0" shadow="cast: false"
+                 animation="property: position; from: 2.2 0.61 0; to: -2.2 0.61 0; dur: 1600; loop: true; easing: linear; delay: 700"></a-box>
+          <a-box width="0.28" height="0.01" depth="0.78" color="#0b0b0b" position="-0.04 0.61 0" shadow="cast: false"
+                 animation="property: position; from: 2.2 0.61 0; to: -2.2 0.61 0; dur: 1600; loop: true; easing: linear; delay: 800"></a-box>
+          <a-box width="0.28" height="0.01" depth="0.78" color="#0f0f0f" position="0.23 0.61 0" shadow="cast: false"
+                 animation="property: position; from: 2.2 0.61 0; to: -2.2 0.61 0; dur: 1600; loop: true; easing: linear; delay: 900"></a-box>
+          <a-box width="0.28" height="0.01" depth="0.78" color="#0b0b0b" position="0.5 0.61 0" shadow="cast: false"
+                 animation="property: position; from: 2.2 0.61 0; to: -2.2 0.61 0; dur: 1600; loop: true; easing: linear; delay: 1000"></a-box>
+          <a-box width="0.28" height="0.01" depth="0.78" color="#0f0f0f" position="0.77 0.61 0" shadow="cast: false"
+                 animation="property: position; from: 2.2 0.61 0; to: -2.2 0.61 0; dur: 1600; loop: true; easing: linear; delay: 1100"></a-box>
+          <a-box width="0.28" height="0.01" depth="0.78" color="#0b0b0b" position="1.04 0.61 0" shadow="cast: false"
+                 animation="property: position; from: 2.2 0.61 0; to: -2.2 0.61 0; dur: 1600; loop: true; easing: linear; delay: 1200"></a-box>
+          <a-box width="0.28" height="0.01" depth="0.78" color="#0f0f0f" position="1.31 0.61 0" shadow="cast: false"
+                 animation="property: position; from: 2.2 0.61 0; to: -2.2 0.61 0; dur: 1600; loop: true; easing: linear; delay: 1300"></a-box>
+          <a-box width="0.28" height="0.01" depth="0.78" color="#0b0b0b" position="1.58 0.61 0" shadow="cast: false"
+                 animation="property: position; from: 2.2 0.61 0; to: -2.2 0.61 0; dur: 1600; loop: true; easing: linear; delay: 1400"></a-box>
+          <a-box width="0.28" height="0.01" depth="0.78" color="#0f0f0f" position="1.85 0.61 0" shadow="cast: false"
+                 animation="property: position; from: 2.2 0.61 0; to: -2.2 0.61 0; dur: 1600; loop: true; easing: linear; delay: 1500"></a-box>
+        </a-entity>
+
+        <!-- Paquetes sobre la banda (más realistas) -->
+        <a-box width="0.32" height="0.24" depth="0.32" color="#e24a4a" position="1.6 0.78 0.18"
+               animation="property: position; from: 2.2 0.78 0.18; to: -2.2 0.78 0.18; dur: 4000; loop: true; easing: linear; delay: 0" shadow="cast: true"></a-box>
+        <a-box width="0.32" height="0.24" depth="0.32" color="#f3d86a" position="0.6 0.78 0"
+               animation="property: position; from: 2.2 0.78 0; to: -2.2 0.78 0; dur: 4000; loop: true; easing: linear; delay: 1000" shadow="cast: true"></a-box>
+        <a-box width="0.32" height="0.24" depth="0.32" color="#23bfa7" position="-0.4 0.78 -0.14"
+               animation="property: position; from: 2.2 0.78 -0.14; to: -2.2 0.78 -0.14; dur: 4000; loop: true; easing: linear; delay: 2000" shadow="cast: true"></a-box>
+        <a-box width="0.32" height="0.24" depth="0.32" color="#3f7ae0" position="-1.4 0.78 0.12"
+               animation="property: position; from: 2.2 0.78 0.12; to: -2.2 0.78 0.12; dur: 4000; loop: true; easing: linear; delay: 3000" shadow="cast: true"></a-box>
+
+      </a-entity>
+
+      <!-- Gripper y riel -->
+      <a-entity id="gripperAssembly" position="0 1.15 -3">
+        <!-- rail superior -->
+        <a-box width="4.6" depth="0.06" height="0.06" color="#2b2b2b" position="0 0.35 0.55"></a-box>
+        <a-box width="4.6" depth="0.06" height="0.06" color="#2b2b2b" position="0 0.35 -0.55"></a-box>
+
+        <!-- carro que se desplaza sobre el riel -->
+        <a-entity id="gripper" position="1.5 0.35 0" animation="property: position; from: 1.5 0.35 0; to: -1.5 0.35 0; dur: 5000; dir: alternate; easing: easeInOutQuad; loop: true" shadow="cast: true">
+
+          <!-- cuerpo del gripper -->
+          <a-box width="0.5" depth="0.6" height="0.12" color="#2e2e2e" position="0 0 0"></a-box>
+
+          <!-- brazo vertical -->
+          <a-box width="0.08" depth="0.08" height="0.7" color="#222" position="0 -0.4 -0.18"></a-box>
+
+          <!-- placa de sujeción (donde van los dedos) -->
+          <a-box width="0.45" depth="0.12" height="0.06" color="#333" position="0 -0.75 -0.18"></a-box>
+
+          <!-- dedos con rotación para simular abrir/cerrar -->
+          <a-box id="fingerLeft" width="0.08" depth="0.02" height="0.28" color="#111" position="-0.18 -0.9 -0.18" rotation="0 0 0"
+                 animation__open="property: rotation; from: 0 0 0; to: 0 0 18; dur: 600; dir: alternate; loop: true; easing: easeInOutSine"></a-box>
+          <a-box id="fingerRight" width="0.08" depth="0.02" height="0.28" color="#111" position="0.18 -0.9 -0.18" rotation="0 0 0"
+                 animation__open2="property: rotation; from: 0 0 0; to: 0 0 -18; dur: 600; dir: alternate; loop: true; easing: easeInOutSine"></a-box>
+
+        </a-entity>
+      </a-entity>
+
+      <!-- Mesa con cubos (más detalle en bordes y patas) -->
+      <a-entity position="0 0 -0.8">
+        <a-box width="2" depth="1.2" height="0.08" color="#7b461f" position="0 0.6 -1.1" shadow="cast: true"></a-box>
+        <a-box width="0.08" depth="0.08" height="0.6" color="#5a3218" position="0.9 0.3 -0.6"></a-box>
+        <a-box width="0.08" depth="0.08" height="0.6" color="#5a3218" position="-0.9 0.3 -0.6"></a-box>
+        <a-box width="0.08" depth="0.08" height="0.6" color="#5a3218" position="0.9 0.3 -1.6"></a-box>
+        <a-box width="0.08" depth="0.08" height="0.6" color="#5a3218" position="-0.9 0.3 -1.6"></a-box>
+
+        <!-- Cubos sobre la mesa (alineados) -->
+        <a-box width="0.28" height="0.28" depth="0.28" color="#e24a4a" position="-0.6 0.84 -1.1" shadow="cast: true"></a-box>
+        <a-box width="0.28" height="0.28" depth="0.28" color="#d8b14a" position="-0.2 0.84 -1.1" shadow="cast: true"></a-box>
+        <a-box width="0.28" height="0.28" depth="0.28" color="#23bfa7" position="0.2 0.84 -1.1" shadow="cast: true"></a-box>
+        <a-box width="0.28" height="0.28" depth="0.28" color="#3f7ae0" position="0.6 0.84 -1.1" shadow="cast: true"></a-box>
+      </a-entity>
+
+      <!-- Texto identificador -->
+      <a-text value="Cinta transportadora - detallada" position="0 2.2 -3" align="center" color="#222"></a-text>
+
+      <!-- Reiniciar cámara con tecla R -->
+      <script>
+        document.addEventListener('keydown', function (e) {
+          if (e.key === 'r' || e.key === 'R') {
+            const rig = document.querySelector('#cameraRig');
+            rig.setAttribute('position', '0 1.6 4');
+            const cam = document.querySelector('#camera');
+            cam.setAttribute('rotation', '0 0 0');
+          }
+        });
+
+        // mejora: permitir cambiar velocidad de la banda con teclas +/-
+        window.addEventListener('keydown', function (ev) {
+          const slats = document.querySelectorAll('#slats a-box');
+          if (!slats.length) return;
+          if (ev.key === '+') {
+            slats.forEach(s => {
+              const anim = s.getAttribute('animation');
+              if (anim && anim.dur) s.setAttribute('animation', Object.assign({}, anim, {dur: Math.max(400, anim.dur - 200)}));
+            });
+          } else if (ev.key === '-') {
+            slats.forEach(s => {
+              const anim = s.getAttribute('animation');
+              if (anim && anim.dur) s.setAttribute('animation', Object.assign({}, anim, {dur: anim.dur + 200}));
+            });
+          }
+        });
+      </script>
+
+    </a-scene>
+  </body>
+</html>
