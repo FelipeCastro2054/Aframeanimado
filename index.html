@@ -85,9 +85,7 @@
         </a-cylinder>
 
         <!-- Slats: listones que van moviéndose para dar la sensación de banda -->
-        <!-- Creamos 16 slats con delays para simular movimiento continuo -->
-        <!-- Cada slat es un rectángulo fino que se desplaza en X de 2.2 a -2.2 -->
-        <a-entity id="slats">
+          <a-entity id="slats">
           <!-- Generadas manualmente para compatibilidad: ajustar n o dur para velocidad -->
           <a-box width="0.28" height="0.01" depth="0.78" color="#0b0b0b" position="-2.2 0.61 0" shadow="cast: false"
                  animation="property: position; from: 2.2 0.61 0; to: -2.2 0.61 0; dur: 1600; loop: true; easing: linear; delay: 0"></a-box>
@@ -135,18 +133,18 @@
 
       </a-entity>
 
-     <!-- Gripper y riel (ELEVADO y corregido) -->
+     <!-- Gripper y riel  -->
       <a-entity id="gripperAssembly" position="0 1.80 -3">
-        <!-- rail superior (sin tocar) -->
+        <!-- rail superior) -->
         <a-box width="4.6" depth="0.06" height="0.06" color="#2b2b2b" position="0 0.35 0.20"></a-box>
         <a-box width="4.6" depth="0.06" height="0.06" color="#2b2b2b" position="0 0.35 -0.20"></a-box>
 
-        <!-- carro que se desplaza sobre el riel: misma altura que los rieles (Y = 0.35) -->
+        <!-- carro que se desplaza sobre el riel: misma altura que los rieles -->
         <a-entity id="gripper" position="1.5 0.35 0"
                   animation="property: position; from: 1.5 0.35 0; to: -1.5 0.35 0; dur: 5000; dir: alternate; easing: easeInOutQuad; loop: true"
                   shadow="cast: true">
 
-          <!-- cuerpo del gripper (centrado en el carrito) -->
+          <!-- cuerpo del gripper -->
           <a-box width="0.5" depth="0.6" height="0.12" color="#2e2e2e" position="0 0 0"></a-box>
 
           <!-- brazo vertical: bajado para no intersectar con el carro -->
@@ -155,7 +153,7 @@
           <!-- placa de sujeción (donde van los dedos): más abajo -->
           <a-box width="0.45" depth="0.12" height="0.06" color="#333" position="0 -0.80 0"></a-box>
 
-          <!-- dedos con rotación para simular abrir/cerrar (abajo y centrados) -->
+          <!-- dedos con rotación para simular abrir/cerrar -->
           <a-box id="fingerLeft" width="0.08" depth="0.02" height="0.28" color="#111"
                  position="-0.18 -0.95 0" rotation="0 0 0"
                  animation__open="property: rotation; from: 0 0 0; to: 0 0 18; dur: 600; dir: alternate; loop: true; easing: easeInOutSine"></a-box>
@@ -167,7 +165,7 @@
         </a-entity>
       </a-entity>
 
-       <!-- Mesa con cubos (se aleja un poco hacia la cámara para no intersectar la banda) -->
+       <!-- Mesa con cubos  -->
       <a-entity position="0 0 -0.2">
         <a-box width="2" depth="1.2" height="0.08" color="#7b461f" position="0 0.6 -1.1" shadow="cast: true"></a-box>
         <a-box width="0.08" depth="0.08" height="0.6" color="#5a3218" position="0.9 0.3 -0.6"></a-box>
