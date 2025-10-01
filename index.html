@@ -10,14 +10,50 @@
   <body>
     <div class="hint">WASD mover / ratón mirar.  Click en la escena y usa las flechas para cámara libre.         Felipe Montaña, Carlos Caviativa, Santiago Herrera         </div>
 
-    <div class="hint-list" id="hintList">
-      <strong>Participantes</strong>
-      <ul>
-        <li>Felipe Montaña</li>
-        <li>Carlos Caviativa</li>
-        <li>Santiago Herrera</li>
-      </ul>
-    </div>
+ <style>
+  body{margin:0;font-family:sans-serif}
+  .hint{
+    position:absolute;
+    left:10px;
+    top:10px;
+    background:rgba(0,0,0,0.45);
+    color:#fff;
+    padding:8px 10px;
+    border-radius:6px;
+    z-index:2147483647;
+    font-size:14px;
+  }
+  .hint-list{
+    position:fixed;
+    left:10px;
+    top:60px;
+    background:rgba(0,0,0,0.75);
+    color:#fff;
+    padding:12px 14px;
+    border-radius:6px;
+    z-index:2147483647;
+    font-size:13px;
+    max-width:320px;
+    pointer-events:auto;
+    display:block;
+  }
+  .hint-list ul{ margin:8px 0 0 18px; padding:0; }
+  .hint-list li{ margin-bottom:6px; line-height:1.25; }
+</style>
+
+<div class="hint">
+  WASD mover / ratón mirar. Click en la escena y usa las flechas para cámara libre.
+</div>
+
+<div class="hint-list" id="hintList">
+  <strong>Participantes</strong>
+  <ul>
+    <li>Felipe Montaña</li>
+    <li>Carlos Caviativa</li>
+    <li>Santiago Herrera</li>
+  </ul>
+</div>
+
     
     <a-scene background="color: #bfc6c9" shadow="type: pcfsoft">
 
@@ -119,18 +155,18 @@
           <a-box width="0.5" depth="0.6" height="0.12" color="#2e2e2e" position="0 0 0"></a-box>
 
           <!-- brazo vertical: bajado para no intersectar con el carro -->
-          <a-box width="0.08" depth="0.08" height="0.7" color="#222" position="0 -0.45 -0.18"></a-box>
+          <a-box width="0.08" depth="0.08" height="0.7" color="#222" position="0 -0.45 0"></a-box>
 
           <!-- placa de sujeción (donde van los dedos): más abajo -->
-          <a-box width="0.45" depth="0.12" height="0.06" color="#333" position="0 -0.80 -0.18"></a-box>
+          <a-box width="0.45" depth="0.12" height="0.06" color="#333" position="0 -0.80 0"></a-box>
 
           <!-- dedos con rotación para simular abrir/cerrar (abajo y centrados) -->
           <a-box id="fingerLeft" width="0.08" depth="0.02" height="0.28" color="#111"
-                 position="-0.18 -0.95 -0.18" rotation="0 0 0"
+                 position="-0.18 -0.95 0" rotation="0 0 0"
                  animation__open="property: rotation; from: 0 0 0; to: 0 0 18; dur: 600; dir: alternate; loop: true; easing: easeInOutSine"></a-box>
 
           <a-box id="fingerRight" width="0.08" depth="0.02" height="0.28" color="#111"
-                 position="0.18 -0.95 -0.18" rotation="0 0 0"
+                 position="0.18 -0.95 0" rotation="0 0 0"
                  animation__open2="property: rotation; from: 0 0 0; to: 0 0 -18; dur: 600; dir: alternate; loop: true; easing: easeInOutSine"></a-box>
 
         </a-entity>
